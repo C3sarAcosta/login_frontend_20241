@@ -33,4 +33,35 @@ class AuthService extends ChangeNotifier {
       decodeResp['error']['message'];
     }
   }
+
+  Future<String?> login(String email, String password) async {
+    final Map<String, dynamic> authData = {
+      'email': email,
+      'password': password
+    };
+    final url = Uri.http(_baseUrl, 'api/Cuentas/Login');
+
+    final resp = await http.post(
+      url,
+      headers: {"Content-Type": "application/json"},
+      body: json.encode(authData),
+    );
+
+    final Map<String, dynamic> decodeResp = json.decode(resp.body);
+
+    if (decodeResp.containsKey('token')) {
+      await storage.write(key: "token", value: decodeResp["token"]);
+      return null;
+    } else {
+      return decodeResp["error"]["message"];
+    }
+  }
+
+  Future logout() async {
+    await storage.delete(key: "token");
+  }
+
+  Future<String> readToken() async {
+    return await storage.read(key: "token") ?? '';
+  }
 }
