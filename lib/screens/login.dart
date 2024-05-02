@@ -135,6 +135,26 @@ class _LoginForm extends StatelessWidget {
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 16,
+                ),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      Color.fromARGB(255, 255, 244, 244),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'register', arguments: '');
+                  },
+                  child: const Text(
+                    'Regístrate',
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(255, 96, 108, 93)),
+                  ),
+                ),
               ],
             ),
           ),
