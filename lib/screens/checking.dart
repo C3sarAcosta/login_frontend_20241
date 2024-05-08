@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_frontend_20241/Services/auth_services.dart';
 import 'package:login_frontend_20241/screens/login.dart';
+import 'package:login_frontend_20241/screens/principal.dart';
 import 'package:provider/provider.dart';
 
 class CheckAuthScreen extends StatelessWidget {
@@ -16,7 +17,7 @@ class CheckAuthScreen extends StatelessWidget {
           future: authService.readToken(),
           builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
             if (!snapshot.hasData) return Text('');
-            if (snapshot.hasData == '') {
+            if (snapshot.hasData != '') {
               Future.microtask(() {
                 Navigator.pushReplacement(
                     context,
